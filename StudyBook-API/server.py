@@ -34,10 +34,16 @@ from pydantic import BaseModel, Field
 from pypdf import PdfReader
 from pptx import Presentation
 from sentence_transformers import SentenceTransformer, util
+from .storage_routes import create_storage_router
+from .supabase_sync_routes import create_sync_router
 import os
 
 os.environ["OMP_NUM_THREADS"] = "1"
 os.environ["MKL_NUM_THREADS"] = "1"
+
+import torch
+
+torch.set_num_threads(1)
 
 # ============================================================
 # LOGGING
@@ -645,6 +651,8 @@ app = FastAPI(
     ),
 )
 
+app.include_router(create_storage_router(authenticated_user))
+app.include_router(create_sync_router(authenticated_user))
 
 app.add_middleware(
     CORSMiddleware,
