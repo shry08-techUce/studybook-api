@@ -1,5 +1,5 @@
+
 fastapi
-uvicorn[standard]
 python-multipart
 python-dotenv
 httpx
@@ -7,7 +7,5 @@ pypdf
 python-docx
 python-pptx
 openpyxl
-sentence-transformers
-torch
 firebase-admin
 supabase>=2.0,<3.0
